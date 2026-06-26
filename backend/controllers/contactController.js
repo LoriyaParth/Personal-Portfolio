@@ -17,38 +17,65 @@ const createContact = async (req, res) => {
       text: `You have received a new message from your portfolio website:\n\nName: ${name}\nEmail: ${email}\nSubject: ${subject}\n\nMessage:\n${message}`
     };
 
-    // Resolve smtp.gmail.com to IPv4 address to bypass Render IPv6 issues
-    dns.resolve4('smtp.gmail.com', (err, addresses) => {
-      let hostAddress = 'smtp.gmail.com';
-      if (!err && addresses && addresses.length > 0) {
-        hostAddress = addresses[0];
-        console.log(`Resolved smtp.gmail.com to IPv4: ${hostAddress}`);
-      } else {
-        console.warn('DNS IPv4 resolution failed, falling back to hostname:', err ? err.message : 'No addresses found');
-      }
-
-      const transporter = nodemailer.createTransport({
-        host: hostAddress,
-        port: 465,
-        secure: true,
-        auth: {
-          user: process.env.EMAIL_USER || 'loriyaparth51@gmail.com',
-          pass: process.env.EMAIL_PASS
+    // Send email using Web3Forms (HTTP API) if key is provided (bypasses Render SMTP port blocking)
+    if (process.env.WEB3FORMS_ACCESS_KEY) {
+      fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
         },
-        tls: {
-          servername: 'smtp.gmail.com' // Crucial for SSL handshake validation on IP addresses
+        body: JSON.stringify({
+          access_key: process.env.WEB3FORMS_ACCESS_KEY,
+          name: name,
+          email: email,
+          subject: `Portfolio Message: ${subject}`,
+          message: message,
+          from_name: `${name} (via Portfolio)`
+        })
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.success) {
+          console.log('Email sent successfully via Web3Forms');
+        } else {
+          console.warn('Web3Forms dispatch failed:', data.message);
+        }
+      })
+      .catch(fetchErr => console.warn('Web3Forms fetch error:', fetchErr.message));
+    } else {
+      // Fallback to Nodemailer SMTP (works on localhost or if Render port is unblocked)
+      dns.resolve4('smtp.gmail.com', (err, addresses) => {
+        let hostAddress = 'smtp.gmail.com';
+        if (!err && addresses && addresses.length > 0) {
+          hostAddress = addresses[0];
+          console.log(`Resolved smtp.gmail.com to IPv4: ${hostAddress}`);
+        } else {
+          console.warn('DNS IPv4 resolution failed, falling back to hostname:', err ? err.message : 'No addresses found');
+        }
+
+        const transporter = nodemailer.createTransport({
+          host: hostAddress,
+          port: 465,
+          secure: true,
+          auth: {
+            user: process.env.EMAIL_USER || 'loriyaparth51@gmail.com',
+            pass: process.env.EMAIL_PASS
+          },
+          tls: {
+            servername: 'smtp.gmail.com'
+          }
+        });
+
+        if (process.env.EMAIL_PASS) {
+          transporter.sendMail(mailOptions)
+            .then(() => console.log('Email sent successfully via SMTP'))
+            .catch((mailError) => console.warn('SMTP Mail Dispatch Warning:', mailError.message));
+        } else {
+          console.log('Email simulated (Set EMAIL_PASS or WEB3FORMS_ACCESS_KEY to send actual email):', mailOptions.text);
         }
       });
-
-      if (process.env.EMAIL_PASS) {
-        // Run in background so the request responds immediately
-        transporter.sendMail(mailOptions)
-          .then(() => console.log('Email sent successfully'))
-          .catch((mailError) => console.warn('Mail Dispatch Warning:', mailError.message));
-      } else {
-        console.log('Email simulated (Set EMAIL_PASS in .env to enable actual email sending):', mailOptions.text);
-      }
-    });
+    }
 
     res.status(201).json({ success: true, data: newContact });
   } catch (error) {
