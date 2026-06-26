@@ -21,7 +21,7 @@ const Navbar = ({ activeTab, setActiveTab }) => {
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className={`px-2.5 py-1.5 sm:px-4 sm:py-1.5 rounded-full text-xs sm:text-sm font-medium transition-all duration-300 ${
+              className={`px-2 py-1 sm:px-4 sm:py-1.5 rounded-full text-[10px] sm:text-sm font-medium transition-all duration-300 ${
                 activeTab === tab.id
                   ? 'bg-accent text-darkbg font-semibold shadow-md shadow-accent/20 scale-105'
                   : 'text-slate-300 hover:text-white hover:bg-white/5'
@@ -36,8 +36,8 @@ const Navbar = ({ activeTab, setActiveTab }) => {
           onClick={() => setActiveTab('letstalk')}
           className={`rounded-full font-semibold transition-all duration-300 ${
             activeTab === 'letstalk'
-              ? 'px-2.5 py-1 text-[10px] sm:px-3.5 sm:py-1 sm:text-xs bg-emerald-400 text-darkbg shadow-md shadow-emerald-400/20 scale-95'
-              : 'px-4 py-2 text-xs sm:px-6 sm:py-2.5 sm:text-sm border border-accent/40 text-accent hover:bg-accent hover:text-darkbg scale-105'
+              ? 'px-2 py-1 text-[10px] sm:px-3.5 sm:py-1 sm:text-xs bg-emerald-400 text-darkbg shadow-md shadow-emerald-400/20 scale-95'
+              : 'px-2.5 py-1 text-[10px] sm:px-6 sm:py-2.5 sm:text-sm border border-accent/40 text-accent hover:bg-accent hover:text-darkbg scale-105'
           }`}
         >
           Let's talk
