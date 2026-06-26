@@ -37,6 +37,25 @@ const LetsTalk = () => {
 
     try {
       await submitContact(formData);
+
+      // Also send email notification directly from frontend to bypass Render's server block & Cloudflare protection
+      const web3FormsKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY || '8f1e35c2-4af9-4205-953c-147dcc5b3a8b';
+      await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          access_key: web3FormsKey,
+          name: formData.name,
+          email: formData.email,
+          subject: `Portfolio Message: ${formData.subject}`,
+          message: formData.message,
+          from_name: `${formData.name} (via Portfolio)`
+        })
+      }).catch(err => console.warn('Web3Forms dispatch warning:', err));
+
       setStatus({ type: 'success', message: 'Message sent successfully! Talk to you soon.' });
       setFormData({ name: '', email: '', subject: '', message: '' });
     } catch (error) {
