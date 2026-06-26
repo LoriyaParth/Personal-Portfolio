@@ -12,8 +12,26 @@ connectDB();
 
 const app = express();
 
-// Middlewares
-app.use(cors());
+const allowedOrigins = [
+  'http://localhost:5173',
+  'http://localhost:3000'
+];
+
+app.use(cors({
+  origin: (origin, callback) => {
+    // Allow requests with no origin (like mobile apps, curl, or server-to-server calls)
+    if (!origin) return callback(null, true);
+    
+    // Check if origin is on allowed list or is a Vercel subdomain
+    const isAllowed = allowedOrigins.includes(origin) || origin.endsWith('.vercel.app');
+    
+    if (isAllowed) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  }
+}));
 app.use(express.json());
 
 // Routes
