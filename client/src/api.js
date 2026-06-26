@@ -1,4 +1,14 @@
-const API_BASE = import.meta.env.VITE_API_URL || '/api';
+let API_BASE = import.meta.env.VITE_API_URL || '/api';
+if (API_BASE && API_BASE !== '/api') {
+  // Clean trailing slash if present
+  if (API_BASE.endsWith('/')) {
+    API_BASE = API_BASE.slice(0, -1);
+  }
+  // Append /api if not present
+  if (!API_BASE.endsWith('/api')) {
+    API_BASE = API_BASE + '/api';
+  }
+}
 
 export const fetchProjects = async () => {
   try {

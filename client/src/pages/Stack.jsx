@@ -47,14 +47,14 @@ const Stack = () => {
                 <h2 className="text-sm font-semibold tracking-wider text-teal-400 uppercase border-b border-teal-950/60 pb-2">
                   {category}
                 </h2>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
                   {items.map((item, idx) => (
-                    <Card3D key={item._id || idx} className="p-5 flex items-center gap-4 min-h-[80px]">
-                      <div className="p-3 bg-darkaccent/60 rounded-xl border border-teal-950">
+                    <Card3D key={item._id || idx} className="p-3 sm:p-5 flex items-center gap-2 sm:gap-4 min-h-[80px]">
+                      <div className="p-2 sm:p-3 bg-darkaccent/60 rounded-xl border border-teal-950 flex-shrink-0">
                         {getIcon(item.icon)}
                       </div>
-                      <div>
-                        <h3 className="text-sm font-semibold text-slate-100">{item.name}</h3>
+                      <div className="min-w-0">
+                        <h3 className="text-xs sm:text-sm font-semibold text-slate-100 break-words">{item.name}</h3>
                       </div>
                     </Card3D>
                   ))}

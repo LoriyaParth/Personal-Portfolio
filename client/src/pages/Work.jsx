@@ -55,10 +55,10 @@ const Work = () => {
 
                   {/* Impact Stats */}
                   {project.stats && (
-                    <div className="grid grid-cols-3 gap-4 border-t border-b border-teal-950/50 py-4 my-6">
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 border-t border-b border-teal-950/50 py-4 my-6">
                       {Object.entries(project.stats).map(([key, val]) => (
                         <div key={key}>
-                          <p className="text-sm md:text-base font-bold text-accent whitespace-nowrap">{val}</p>
+                          <p className="text-sm md:text-base font-bold text-accent">{val}</p>
                           <p className="text-[10px] text-slate-500 uppercase tracking-wider mt-1">
                             {key === 'onboarding' ? 'Security' : key === 'signups' ? 'Audience' : 'Tracking'}
                           </p>
@@ -102,6 +102,7 @@ const Work = () => {
                   <img
                     src={project.imageUrl}
                     alt={project.title}
+                    loading="lazy"
                     className="w-full aspect-[4/3] md:aspect-[16/10] object-cover group-hover/img:scale-105 transition-transform duration-700"
                   />
                 </a>

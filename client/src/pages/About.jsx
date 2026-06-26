@@ -25,22 +25,8 @@ const About = ({ setActiveTab }) => {
         </p>
       </div>
 
-      {/* 3D Tilted Photo Cards Stack */}
-      <div className="flex flex-wrap justify-center gap-6 mb-20">
-        {[
-          "https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=400&auto=format&fit=crop",
-          "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=400&auto=format&fit=crop",
-          "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=400&auto=format&fit=crop",
-          "https://images.unsplash.com/photo-1531403009284-440f080d1e12?q=80&w=400&auto=format&fit=crop"
-        ].map((url, idx) => (
-          <Card3D key={idx} className="w-[180px] h-[240px] border border-teal-950/40 shadow-xl">
-            <img src={url} alt="Workspace detail" className="w-full h-full object-cover filter grayscale hover:grayscale-0 transition-all duration-500" />
-          </Card3D>
-        ))}
-      </div>
-
       {/* Marquee Banner */}
-      <div className="w-screen relative left-[50%] right-[50%] -ml-[50vw] -mr-[50vw] bg-emerald-400 text-darkbg py-3 overflow-hidden select-none mb-20 font-bold uppercase tracking-wider text-sm whitespace-nowrap">
+      <div className="w-full bg-emerald-400 text-darkbg py-3 overflow-hidden select-none mb-20 font-bold uppercase tracking-wider text-sm whitespace-nowrap rounded-2xl">
         <div className="flex w-[200%] animate-marquee whitespace-nowrap">
           {Array(4).fill([
             "EMPATHY •", "USER FRIENDLY •", "ACCESSIBILITY •", "DESIGN THINKING •", "MERN STACK •", "3D INTERACTIVES •"
