@@ -6,6 +6,7 @@ const Card3D = ({ children, className = '' }) => {
   const [isHovered, setIsHovered] = useState(false);
 
   const handleMouseMove = (e) => {
+    if (!window.matchMedia('(hover: hover)').matches) return;
     if (!cardRef.current) return;
     const card = cardRef.current;
     const rect = card.getBoundingClientRect();
@@ -17,9 +18,13 @@ const Card3D = ({ children, className = '' }) => {
     setCoords({ x, y });
   };
 
-  const handleMouseEnter = () => setIsHovered(true);
+  const handleMouseEnter = () => {
+    if (!window.matchMedia('(hover: hover)').matches) return;
+    setIsHovered(true);
+  };
   
   const handleMouseLeave = () => {
+    if (!window.matchMedia('(hover: hover)').matches) return;
     setIsHovered(false);
     setCoords({ x: 0, y: 0 });
   };
