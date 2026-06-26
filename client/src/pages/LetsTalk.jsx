@@ -68,7 +68,7 @@ const LetsTalk = () => {
   return (
     <div className="max-w-4xl mx-auto px-6 py-12">
       <div className="text-center max-w-2xl mx-auto mb-12">
-        <span className="text-xs font-semibold tracking-widest text-teal-400 uppercase">Interactive Form</span>
+        <span className="text-xs font-semibold tracking-widest text-accent uppercase">Interactive Form</span>
         <h1 className="font-serif text-4xl md:text-5xl font-medium text-white mt-3 mb-6">
           Let's talk about your project
         </h1>
@@ -77,7 +77,7 @@ const LetsTalk = () => {
         </p>
       </div>
 
-      <Card3D className="p-8 md:p-12 border border-teal-950/60 max-w-2xl mx-auto">
+      <Card3D className="p-8 md:p-12 border border-accent/20 max-w-2xl mx-auto">
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
@@ -147,7 +147,7 @@ const LetsTalk = () => {
           {status.message && (
             <div className={`p-4 rounded-xl text-sm font-semibold border ${
               status.type === 'success' 
-                ? 'bg-emerald-950/60 text-emerald-400 border-emerald-800' 
+                ? 'bg-accent/10 text-accent border-accent/20' 
                 : 'bg-rose-950/60 text-rose-400 border-rose-800'
             }`}>
               {status.message}

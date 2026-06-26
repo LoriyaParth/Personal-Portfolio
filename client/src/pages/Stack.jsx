@@ -26,7 +26,7 @@ const Stack = () => {
   return (
     <div className="max-w-5xl mx-auto px-6 py-12">
       <div className="text-center max-w-2xl mx-auto mb-16">
-        <span className="text-xs font-semibold tracking-widest text-teal-400 uppercase">My Toolbox</span>
+        <span className="text-xs font-semibold tracking-widest text-accent uppercase">My Toolbox</span>
         <h1 className="font-serif text-4xl md:text-5xl font-medium text-white mt-3 mb-6">
           The stack I use to build
         </h1>
@@ -36,7 +36,7 @@ const Stack = () => {
       </div>
 
       {loading ? (
-        <div className="text-center text-teal-400 py-10">Loading technology stack...</div>
+        <div className="text-center text-accent py-10">Loading technology stack...</div>
       ) : (
         <div className="space-y-12">
           {categories.map((category) => {
@@ -44,13 +44,13 @@ const Stack = () => {
             if (items.length === 0) return null;
             return (
               <div key={category} className="space-y-4">
-                <h2 className="text-sm font-semibold tracking-wider text-teal-400 uppercase border-b border-teal-950/60 pb-2">
+                <h2 className="text-sm font-semibold tracking-wider text-accent uppercase border-b border-accent/20 pb-2">
                   {category}
                 </h2>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
                   {items.map((item, idx) => (
                     <Card3D key={item._id || idx} className="p-3 sm:p-5 flex items-center gap-2 sm:gap-4 min-h-[80px]">
-                      <div className="p-2 sm:p-3 bg-darkaccent/60 rounded-xl border border-teal-950 flex-shrink-0">
+                      <div className="p-2 sm:p-3 bg-darkaccent/60 rounded-xl border border-accent/20 flex-shrink-0">
                         {getIcon(item.icon)}
                       </div>
                       <div className="min-w-0">

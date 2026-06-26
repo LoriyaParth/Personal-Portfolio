@@ -2,7 +2,7 @@ import React from 'react';
 
 const Footer = ({ setActiveTab }) => {
   return (
-    <footer className="w-full border-t border-teal-950/60 py-10 px-6 mt-20">
+    <footer className="w-full border-t border-accent/20 py-10 px-6 mt-20">
       <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
         <div>
           <h3 className="font-serif text-lg text-slate-200">giving up is the only sure way to fail</h3>

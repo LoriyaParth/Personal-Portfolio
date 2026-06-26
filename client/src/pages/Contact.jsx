@@ -11,7 +11,7 @@ const Contact = ({ setActiveTab }) => {
   return (
     <div className="max-w-5xl mx-auto px-6 py-12">
       <div className="text-center max-w-2xl mx-auto mb-16">
-        <span className="text-xs font-semibold tracking-widest text-teal-400 uppercase">Say Hello</span>
+        <span className="text-xs font-semibold tracking-widest text-accent uppercase">Say Hello</span>
         <h1 className="font-serif text-4xl md:text-5xl font-medium text-white mt-3 mb-6">
           Connect with me
         </h1>
@@ -43,7 +43,7 @@ const Contact = ({ setActiveTab }) => {
               href={social.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-between p-5 bg-cardbg/40 border border-teal-950/60 rounded-2xl hover:border-accent/40 hover:bg-teal-950/20 transition-all duration-300 group"
+              className="flex items-center justify-between p-5 bg-cardbg/40 border border-accent/20 rounded-2xl hover:border-accent/40 hover:bg-accent/5 transition-all duration-300 group"
             >
               <div className="flex items-center gap-4">
                 <span className="text-2xl">{social.icon}</span>

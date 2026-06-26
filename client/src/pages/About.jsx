@@ -9,9 +9,9 @@ const About = ({ setActiveTab }) => {
       <div className="max-w-5xl mx-auto px-6 pt-12 pb-6">
         {/* Main Intro */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <span className="text-xs font-semibold tracking-widest text-teal-400 uppercase">About Me</span>
+          <span className="text-xs font-semibold tracking-widest text-accent uppercase">About Me</span>
           <h1 className="font-serif text-4xl md:text-5xl font-medium tracking-tight text-white mt-3 mb-6">
-            PARTH LORIYA <span className="text-teal-300 italic">| MERN & Fullstack Developer</span>
+            PARTH LORIYA <span className="text-accent/80 italic">| MERN & Fullstack Developer</span>
           </h1>
           <p className="text-slate-300 leading-relaxed text-base md:text-lg">
             I am a passionate MERN Stack Developer currently pursuing my B.Tech in Computer Engineering at <strong>A.D. Patel Institute of Technology</strong> (CGPA: 7.46, expected graduation May 2027). Recently, I completed a Full-Stack Developer Internship at <strong>Prelytix Pvt. Ltd.</strong> (May 2026 – Jun 2026), building full-stack modules using React, Node.js, Express, and MongoDB.
@@ -20,7 +20,7 @@ const About = ({ setActiveTab }) => {
       </div>
 
       {/* Marquee Banner - Completely Full-Width (outside max-w container) */}
-      <div className="w-full bg-emerald-400 text-darkbg py-3 overflow-hidden select-none mb-20 font-bold uppercase tracking-wider text-sm whitespace-nowrap">
+      <div className="w-full bg-accent text-darkbg py-3 overflow-hidden select-none mb-20 font-bold uppercase tracking-wider text-sm whitespace-nowrap">
         <div className="flex w-[200%] animate-marquee whitespace-nowrap">
           {Array(4).fill([
             "EMPATHY •", "USER FRIENDLY •", "ACCESSIBILITY •", "DESIGN THINKING •", "MERN STACK •", "3D INTERACTIVES •"
@@ -35,7 +35,7 @@ const About = ({ setActiveTab }) => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {/* About Info text */}
           <div className="md:col-span-1 flex flex-col justify-center">
-            <span className="text-xs font-semibold tracking-widest text-teal-400 uppercase mb-2">Beyond Portfolio</span>
+            <span className="text-xs font-semibold tracking-widest text-accent uppercase mb-2">Beyond Portfolio</span>
             <h2 className="font-serif text-3xl font-semibold text-slate-100 mb-4">Let's know more about me</h2>
             <p className="text-sm text-slate-400 leading-relaxed mb-6">
               I balance technical skill sets with design principles. I love working close to design mockups and crafting immersive frontend experiences without leaving code optimization behind.
@@ -51,7 +51,7 @@ const About = ({ setActiveTab }) => {
           {/* Current Read */}
           <Card3D className="p-6 flex flex-col justify-between min-h-[280px]">
             <div>
-              <span className="text-xs font-semibold tracking-wider text-teal-400">+ Current Read</span>
+              <span className="text-xs font-semibold tracking-wider text-accent">+ Current Read</span>
               <p className="text-xs text-slate-400 mt-1">The Psychology of Money - Morgan Housel</p>
             </div>
             <div className="book-container flex justify-center py-4">
@@ -69,7 +69,7 @@ const About = ({ setActiveTab }) => {
           <div className="flex flex-col gap-6">
             {/* Persona Widget */}
             <Card3D className="p-6 flex flex-col justify-between">
-              <span className="text-xs font-semibold tracking-wider text-teal-400">+ My Persona</span>
+              <span className="text-xs font-semibold tracking-wider text-accent">+ My Persona</span>
               <p className="text-xs text-slate-400 mb-4">Know me as a person</p>
               <FloatingPersona />
             </Card3D>
@@ -77,7 +77,7 @@ const About = ({ setActiveTab }) => {
             {/* Map Location Widget */}
             <Card3D className="p-4 flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-teal-500/10 border border-teal-500/20 flex items-center justify-center">
+                <div className="w-10 h-10 rounded-full bg-accent/10 border border-accent/20 flex items-center justify-center">
                   📍
                 </div>
                 <div>
@@ -85,7 +85,10 @@ const About = ({ setActiveTab }) => {
                   <p className="text-[10px] text-slate-400">Home Location</p>
                 </div>
               </div>
-              <span className="w-3 h-3 rounded-full bg-emerald-400 animate-ping" />
+              <span className="relative flex h-3 w-3">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-3 w-3 bg-accent"></span>
+              </span>
             </Card3D>
           </div>
         </div>

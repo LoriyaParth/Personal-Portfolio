@@ -9,35 +9,35 @@
     overflow-x: hidden;
   }
   body {
-    background-color: #071615;
+    background-color: #121113;
     background-image: 
-      radial-gradient(at 0% 0%, rgba(20, 184, 166, 0.15) 0px, transparent 50%),
-      radial-gradient(at 100% 100%, rgba(13, 148, 136, 0.12) 0px, transparent 50%),
-      radial-gradient(at 50% 50%, rgba(15, 23, 42, 0.5) 0px, transparent 80%);
+      radial-gradient(at 0% 0%, rgba(184, 134, 109, 0.12) 0px, transparent 50%),
+      radial-gradient(at 100% 100%, rgba(244, 235, 225, 0.08) 0px, transparent 50%),
+      radial-gradient(at 50% 50%, rgba(28, 26, 30, 0.5) 0px, transparent 80%);
     background-attachment: fixed;
   }
 }
 
 /* Glassmorphism utility */
 .glass-panel {
-  background: rgba(15, 37, 35, 0.45);
+  background: rgba(28, 26, 30, 0.5);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(94, 234, 212, 0.1);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  border: 1px solid rgba(184, 134, 109, 0.15);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.45);
 }
 
 .glass-input {
-  background: rgba(8, 25, 23, 0.6);
-  border: 1px solid rgba(94, 234, 212, 0.15);
-  color: #f1f5f9;
+  background: rgba(18, 17, 19, 0.65);
+  border: 1px solid rgba(184, 134, 109, 0.2);
+  color: #fffdf0;
   transition: all 0.3s ease;
 }
 
 .glass-input:focus {
   outline: none;
-  border-color: #5eead4;
-  box-shadow: 0 0 15px rgba(94, 234, 212, 0.3);
+  border-color: #b8866d;
+  box-shadow: 0 0 15px rgba(184, 134, 109, 0.35);
 }
 
 /* 3D Book Cover styling */
@@ -65,7 +65,7 @@
   position: absolute;
   width: 100%;
   height: 100%;
-  background: #115e59;
+  background: #966550;
   border-radius: 3px 6px 6px 3px;
   transform: translateZ(10px);
   box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.5);
@@ -75,7 +75,7 @@
   position: absolute;
   width: 20px;
   height: 100%;
-  background: #0f3d3a;
+  background: #4d3b33;
   left: 0;
   transform: rotateY(-90deg) translateZ(10px);
   transform-origin: left;
@@ -100,7 +100,7 @@
   content: '';
   position: absolute;
   inset: -1px;
-  background: linear-gradient(135deg, rgba(94, 234, 212, 0.4), transparent 50%, rgba(94, 234, 212, 0.1));
+  background: linear-gradient(135deg, rgba(184, 134, 109, 0.4), transparent 50%, rgba(184, 134, 109, 0.1));
   z-index: -1;
   border-radius: inherit;
   opacity: 0;
@@ -117,15 +117,15 @@
   transform: perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1);
   transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), border-color 0.3s, box-shadow 0.3s;
   will-change: transform;
-  border-color: rgba(20, 184, 166, 0.1);
+  border-color: rgba(184, 134, 109, 0.15);
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
 }
 
 .card-3d.card-hovered {
   transform: perspective(1000px) rotateX(calc(var(--y) * -15deg)) rotateY(calc(var(--x) * 15deg)) scale3d(1.02, 1.02, 1.02);
   transition: transform 0.08s ease-out, border-color 0.3s, box-shadow 0.3s;
-  border-color: rgba(94, 234, 212, 0.4);
-  box-shadow: 0 15px 35px rgba(94, 234, 212, 0.15);
+  border-color: rgba(184, 134, 109, 0.45);
+  box-shadow: 0 15px 35px rgba(184, 134, 109, 0.2);
 }
 
 .card-glare {

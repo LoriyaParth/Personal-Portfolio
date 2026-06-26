@@ -11,7 +11,7 @@ const Navbar = ({ activeTab, setActiveTab }) => {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 w-full flex justify-center py-6 px-4">
-      <nav className="glass-panel py-1.5 px-2 sm:py-2.5 sm:px-3 rounded-full flex items-center justify-center max-w-xl w-full shadow-lg border border-teal-500/20">
+      <nav className="glass-panel py-1.5 px-2 sm:py-2.5 sm:px-3 rounded-full flex items-center justify-center max-w-xl w-full shadow-lg border border-accent/20">
         <div className="flex items-center justify-center gap-1 sm:gap-2">
           {tabs.map((tab) => (
             <button

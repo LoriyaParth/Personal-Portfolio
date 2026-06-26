@@ -18,7 +18,7 @@ const Work = () => {
   return (
     <div className="max-w-5xl mx-auto px-6 py-12">
       <div className="text-center max-w-2xl mx-auto mb-16">
-        <span className="text-xs font-semibold tracking-widest text-teal-400 uppercase">Curated Work</span>
+        <span className="text-xs font-semibold tracking-widest text-accent uppercase">Curated Work</span>
         <h1 className="font-serif text-4xl md:text-5xl font-medium text-white mt-3 mb-6">
           Featured Projects
         </h1>
@@ -28,11 +28,11 @@ const Work = () => {
       </div>
 
       {loading ? (
-        <div className="text-center text-teal-400 py-10">Loading portfolio works...</div>
+        <div className="text-center text-accent py-10">Loading portfolio works...</div>
       ) : (
         <div className="space-y-12">
           {projects.map((project) => (
-            <Card3D key={project._id} className="p-8 md:p-12 border border-teal-950/60">
+            <Card3D key={project._id} className="p-8 md:p-12 border border-accent/20">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
                 {/* Left side details */}
                 <div className="space-y-6">
@@ -55,7 +55,7 @@ const Work = () => {
 
                   {/* Impact Stats */}
                   {project.stats && (
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 border-t border-b border-teal-950/50 py-4 my-6">
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 border-t border-b border-accent/20 py-4 my-6">
                       {Object.entries(project.stats).map(([key, val]) => (
                         <div key={key}>
                           <p className="text-sm md:text-base font-bold text-accent">{val}</p>
@@ -70,7 +70,7 @@ const Work = () => {
                   {/* Tech tags */}
                   <div className="flex flex-wrap gap-2">
                     {project.tags.map((tag, idx) => (
-                      <span key={idx} className="text-xs bg-darkaccent/40 text-slate-300 px-3 py-1 rounded-md border border-teal-950/60">
+                      <span key={idx} className="text-xs bg-darkaccent/40 text-slate-300 px-3 py-1 rounded-md border border-accent/20">
                         {tag}
                       </span>
                     ))}
@@ -96,7 +96,7 @@ const Work = () => {
                   href="https://github.com/LoriyaParth"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="relative group/img overflow-hidden rounded-2xl border border-teal-950/60 shadow-2xl block"
+                  className="relative group/img overflow-hidden rounded-2xl border border-accent/20 shadow-2xl block"
                 >
                   <div className="absolute inset-0 bg-gradient-to-t from-darkbg/50 to-transparent pointer-events-none z-10" />
                   <img
