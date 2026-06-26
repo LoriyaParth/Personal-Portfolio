@@ -6,7 +6,6 @@ const Card3D = ({ children, className = '' }) => {
   const [isHovered, setIsHovered] = useState(false);
 
   const handleMouseMove = (e) => {
-    if (!window.matchMedia('(hover: hover)').matches) return;
     if (!cardRef.current) return;
     const card = cardRef.current;
     const rect = card.getBoundingClientRect();
@@ -19,12 +18,31 @@ const Card3D = ({ children, className = '' }) => {
   };
 
   const handleMouseEnter = () => {
-    if (!window.matchMedia('(hover: hover)').matches) return;
     setIsHovered(true);
   };
   
   const handleMouseLeave = () => {
-    if (!window.matchMedia('(hover: hover)').matches) return;
+    setIsHovered(false);
+    setCoords({ x: 0, y: 0 });
+  };
+
+  const handleTouchStart = () => {
+    setIsHovered(true);
+  };
+
+  const handleTouchMove = (e) => {
+    if (!cardRef.current || e.touches.length === 0) return;
+    const card = cardRef.current;
+    const rect = card.getBoundingClientRect();
+    const touch = e.touches[0];
+    
+    const x = (touch.clientX - rect.left) / rect.width - 0.5;
+    const y = (touch.clientY - rect.top) / rect.height - 0.5;
+
+    setCoords({ x, y });
+  };
+
+  const handleTouchEnd = () => {
     setIsHovered(false);
     setCoords({ x: 0, y: 0 });
   };
@@ -38,7 +56,7 @@ const Card3D = ({ children, className = '' }) => {
     transform: isHovered 
       ? `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)` 
       : 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)',
-    transition: isHovered ? 'none' : 'transform 0.5s ease',
+    transition: isHovered ? 'transform 0.15s ease-out' : 'transform 0.5s ease',
   };
 
   return (
@@ -47,6 +65,9 @@ const Card3D = ({ children, className = '' }) => {
       onMouseMove={handleMouseMove}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
       style={style}
       className={`relative rounded-3xl overflow-hidden glass-panel transition-shadow duration-300 ${
         isHovered ? 'shadow-[0_15px_35px_rgba(94,234,212,0.15)] border-teal-400/40' : 'shadow-lg border-teal-950'
