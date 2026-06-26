@@ -4,7 +4,7 @@ import Card3D from '../components/Card3D';
 const Contact = ({ setActiveTab }) => {
   const socials = [
     { name: 'GitHub', url: 'https://github.com/LoriyaParth', handle: 'LoriyaParth', icon: '💻' },
-    { name: 'LinkedIn', url: 'https://linkedin.com/in/LoriyaParth', handle: 'LORIYA PARTH', icon: '💼' },
+    { name: 'LinkedIn', url: 'https://www.linkedin.com/in/loriya-parth-54b423394?utm_source=share_via&utm_content=profile&utm_medium=member_android', handle: 'LORIYA PARTH', icon: '💼' },
     { name: 'Email', url: 'mailto:loriyaparth51@gmail.com', handle: 'loriyaparth51@gmail.com', icon: '📧' }
   ];
 
