@@ -10,20 +10,6 @@ const createContact = async (req, res) => {
     }
     const newContact = await Contact.create({ name, email, subject, message });
 
-    // Configure transporter forcing IPv4 via custom DNS lookup to prevent Render IPv6 ENETUNREACH errors
-    const transporter = nodemailer.createTransport({
-      host: 'smtp.gmail.com',
-      port: 465,
-      secure: true,
-      lookup: (hostname, options, callback) => {
-        dns.lookup(hostname, { family: 4 }, callback);
-      },
-      auth: {
-        user: process.env.EMAIL_USER || 'loriyaparth51@gmail.com',
-        pass: process.env.EMAIL_PASS
-      }
-    });
-
     const mailOptions = {
       from: email,
       to: 'loriyaparth51@gmail.com',
@@ -31,7 +17,29 @@ const createContact = async (req, res) => {
       text: `You have received a new message from your portfolio website:\n\nName: ${name}\nEmail: ${email}\nSubject: ${subject}\n\nMessage:\n${message}`
     };
 
-    try {
+    // Resolve smtp.gmail.com to IPv4 address to bypass Render IPv6 issues
+    dns.resolve4('smtp.gmail.com', (err, addresses) => {
+      let hostAddress = 'smtp.gmail.com';
+      if (!err && addresses && addresses.length > 0) {
+        hostAddress = addresses[0];
+        console.log(`Resolved smtp.gmail.com to IPv4: ${hostAddress}`);
+      } else {
+        console.warn('DNS IPv4 resolution failed, falling back to hostname:', err ? err.message : 'No addresses found');
+      }
+
+      const transporter = nodemailer.createTransport({
+        host: hostAddress,
+        port: 465,
+        secure: true,
+        auth: {
+          user: process.env.EMAIL_USER || 'loriyaparth51@gmail.com',
+          pass: process.env.EMAIL_PASS
+        },
+        tls: {
+          servername: 'smtp.gmail.com' // Crucial for SSL handshake validation on IP addresses
+        }
+      });
+
       if (process.env.EMAIL_PASS) {
         // Run in background so the request responds immediately
         transporter.sendMail(mailOptions)
@@ -40,9 +48,7 @@ const createContact = async (req, res) => {
       } else {
         console.log('Email simulated (Set EMAIL_PASS in .env to enable actual email sending):', mailOptions.text);
       }
-    } catch (err) {
-      console.warn('Mail Setup Warning:', err.message);
-    }
+    });
 
     res.status(201).json({ success: true, data: newContact });
   } catch (error) {
