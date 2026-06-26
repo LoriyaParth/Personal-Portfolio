@@ -1,87 +1,66 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef } from 'react';
 
 const Card3D = ({ children, className = '' }) => {
   const cardRef = useRef(null);
-  const [coords, setCoords] = useState({ x: 0, y: 0 });
-  const [isHovered, setIsHovered] = useState(false);
 
-  const handleMouseMove = (e) => {
-    if (!cardRef.current) return;
+  const handleMove = (clientX, clientY) => {
     const card = cardRef.current;
+    if (!card) return;
     const rect = card.getBoundingClientRect();
     
-    // Relative position within card (-0.5 to 0.5)
-    const x = (e.clientX - rect.left) / rect.width - 0.5;
-    const y = (e.clientY - rect.top) / rect.height - 0.5;
+    // Relative position within card clamped between -0.5 and 0.5
+    const x = Math.max(-0.5, Math.min(0.5, (clientX - rect.left) / rect.width - 0.5));
+    const y = Math.max(-0.5, Math.min(0.5, (clientY - rect.top) / rect.height - 0.5));
 
-    setCoords({ x, y });
+    // Update CSS variables directly on the element style (bypasses React state re-renders)
+    card.style.setProperty('--x', x);
+    card.style.setProperty('--y', y);
   };
 
-  const handleMouseEnter = () => {
-    setIsHovered(true);
-  };
-  
-  const handleMouseLeave = () => {
-    setIsHovered(false);
-    setCoords({ x: 0, y: 0 });
+  const handleMouseMove = (e) => {
+    handleMove(e.clientX, e.clientY);
   };
 
-  const handleTouchStart = () => {
-    setIsHovered(true);
+  const handleStart = () => {
+    const card = cardRef.current;
+    if (!card) return;
+    card.classList.add('card-hovered');
+  };
+
+  const handleTouchStart = (e) => {
+    handleStart();
+    if (e.touches.length > 0) {
+      handleMove(e.touches[0].clientX, e.touches[0].clientY);
+    }
   };
 
   const handleTouchMove = (e) => {
-    if (!cardRef.current || e.touches.length === 0) return;
+    if (e.touches.length === 0) return;
+    handleMove(e.touches[0].clientX, e.touches[0].clientY);
+  };
+
+  const handleEnd = () => {
     const card = cardRef.current;
-    const rect = card.getBoundingClientRect();
-    const touch = e.touches[0];
-    
-    const x = (touch.clientX - rect.left) / rect.width - 0.5;
-    const y = (touch.clientY - rect.top) / rect.height - 0.5;
-
-    setCoords({ x, y });
-  };
-
-  const handleTouchEnd = () => {
-    setIsHovered(false);
-    setCoords({ x: 0, y: 0 });
-  };
-
-  // Rotation limits (degrees)
-  const maxRotate = 15;
-  const rotateX = -coords.y * maxRotate;
-  const rotateY = coords.x * maxRotate;
-
-  const style = {
-    transform: isHovered 
-      ? `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)` 
-      : 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)',
-    transition: isHovered ? 'transform 0.15s ease-out' : 'transform 0.5s ease',
+    if (!card) return;
+    card.classList.remove('card-hovered');
+    card.style.setProperty('--x', '0');
+    card.style.setProperty('--y', '0');
   };
 
   return (
     <div
       ref={cardRef}
       onMouseMove={handleMouseMove}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
+      onMouseEnter={handleStart}
+      onMouseLeave={handleEnd}
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
-      onTouchEnd={handleTouchEnd}
-      style={style}
-      className={`relative rounded-3xl overflow-hidden glass-panel transition-shadow duration-300 ${
-        isHovered ? 'shadow-[0_15px_35px_rgba(94,234,212,0.15)] border-teal-400/40' : 'shadow-lg border-teal-950'
-      } ${className}`}
+      onTouchEnd={handleEnd}
+      onTouchCancel={handleEnd}
+      className={`card-3d relative rounded-3xl overflow-hidden glass-panel ${className}`}
     >
       {/* 3D Reflection Glare Overlay */}
-      {isHovered && (
-        <div 
-          className="absolute inset-0 pointer-events-none z-10"
-          style={{
-            background: `radial-gradient(circle 250px at ${(coords.x + 0.5) * 100}% ${(coords.y + 0.5) * 100}%, rgba(255,255,255,0.08), transparent)`,
-          }}
-        />
-      )}
+      <div className="card-glare absolute inset-0 pointer-events-none z-10" />
       {children}
     </div>
   );

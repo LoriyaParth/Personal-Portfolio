@@ -7,19 +7,10 @@ const About = ({ setActiveTab }) => {
     <>
       {/* Top half with intro (centered) */}
       <div className="max-w-5xl mx-auto px-6 pt-12 pb-6">
-        {/* Sun/Smiling Icon */}
-        <div className="flex justify-center mb-6">
-          <div className="w-16 h-16 rounded-full bg-emerald-500/10 border border-emerald-400/40 flex items-center justify-center animate-spin-slow">
-            <svg className="w-10 h-10 text-emerald-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-              <circle cx="12" cy="12" r="5" />
-              <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
-            </svg>
-          </div>
-        </div>
-
         {/* Main Intro */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <h1 className="font-serif text-4xl md:text-5xl font-medium tracking-tight text-white mb-6">
+          <span className="text-xs font-semibold tracking-widest text-teal-400 uppercase">About Me</span>
+          <h1 className="font-serif text-4xl md:text-5xl font-medium tracking-tight text-white mt-3 mb-6">
             PARTH LORIYA <span className="text-teal-300 italic">| MERN & Fullstack Developer</span>
           </h1>
           <p className="text-slate-300 leading-relaxed text-base md:text-lg">
@@ -65,11 +56,11 @@ const About = ({ setActiveTab }) => {
             </div>
             <div className="book-container flex justify-center py-4">
               <div className="book">
+                <div className="book-page" />
                 <div className="book-spine" />
                 <div className="book-cover flex items-center justify-center p-3 text-center text-[10px] font-bold text-white uppercase select-none">
                   The Psychology of Money
                 </div>
-                <div className="book-page" />
               </div>
             </div>
           </Card3D>

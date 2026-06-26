@@ -51,11 +51,14 @@
   height: 200px;
   transform-style: preserve-3d;
   transform: rotateY(-15deg);
-  transition: transform 0.5s ease;
+  transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+  will-change: transform;
 }
 
-.book:hover {
-  transform: rotateY(-30deg) rotateX(10deg);
+@media (hover: hover) {
+  .book:hover {
+    transform: rotateY(-30deg) rotateX(10deg);
+  }
 }
 
 .book-cover {
@@ -104,5 +107,33 @@
   transition: opacity 0.5s ease;
 }
 .glow-effect:hover::after {
+  opacity: 1;
+}
+
+/* Highly optimized 3D Card effects using CSS variables */
+.card-3d {
+  --x: 0;
+  --y: 0;
+  transform: perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1);
+  transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), border-color 0.3s, box-shadow 0.3s;
+  will-change: transform;
+  border-color: rgba(20, 184, 166, 0.1);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.card-3d.card-hovered {
+  transform: perspective(1000px) rotateX(calc(var(--y) * -15deg)) rotateY(calc(var(--x) * 15deg)) scale3d(1.02, 1.02, 1.02);
+  transition: transform 0.08s ease-out, border-color 0.3s, box-shadow 0.3s;
+  border-color: rgba(94, 234, 212, 0.4);
+  box-shadow: 0 15px 35px rgba(94, 234, 212, 0.15);
+}
+
+.card-glare {
+  background: radial-gradient(circle 250px at calc((var(--x) + 0.5) * 100%) calc((var(--y) + 0.5) * 100%), rgba(255, 255, 255, 0.08), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.card-3d.card-hovered .card-glare {
   opacity: 1;
 }
