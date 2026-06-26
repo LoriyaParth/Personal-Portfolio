@@ -9,9 +9,12 @@ const createContact = async (req, res) => {
     }
     const newContact = await Contact.create({ name, email, subject, message });
 
-    // Configure transporter
+    // Configure transporter forcing IPv4 (family: 4) to prevent Render IPv6 ENETUNREACH errors
     const transporter = nodemailer.createTransport({
-      service: 'gmail',
+      host: 'smtp.gmail.com',
+      port: 465,
+      secure: true,
+      family: 4,
       auth: {
         user: process.env.EMAIL_USER || 'loriyaparth51@gmail.com',
         pass: process.env.EMAIL_PASS
