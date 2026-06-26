@@ -28,7 +28,7 @@ function App() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen w-full max-w-full overflow-x-hidden">
+    <div className="relative flex flex-col min-h-screen w-full max-w-full overflow-x-hidden">
       {/* Top Background Glow overlays */}
       <div className="absolute top-0 left-[20%] w-[350px] h-[350px] bg-teal-500/10 rounded-full filter blur-[120px] pointer-events-none animate-pulse-slow" />
       <div className="absolute top-[40%] right-[10%] w-[450px] h-[450px] bg-emerald-500/5 rounded-full filter blur-[150px] pointer-events-none" />

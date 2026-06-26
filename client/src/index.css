@@ -3,7 +3,8 @@
 @tailwind utilities;
 
 @layer base {
-  html, body {
+  html, body, #root {
+    width: 100%;
     max-width: 100%;
     overflow-x: hidden;
   }
