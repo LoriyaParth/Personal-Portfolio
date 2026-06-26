@@ -27,13 +27,15 @@ const createContact = async (req, res) => {
 
     try {
       if (process.env.EMAIL_PASS) {
-        await transporter.sendMail(mailOptions);
-        console.log('Email sent successfully');
+        // Run in background so the request responds immediately
+        transporter.sendMail(mailOptions)
+          .then(() => console.log('Email sent successfully'))
+          .catch((mailError) => console.warn('Mail Dispatch Warning:', mailError.message));
       } else {
         console.log('Email simulated (Set EMAIL_PASS in .env to enable actual email sending):', mailOptions.text);
       }
-    } catch (mailError) {
-      console.warn('Mail Dispatch Warning:', mailError.message);
+    } catch (err) {
+      console.warn('Mail Setup Warning:', err.message);
     }
 
     res.status(201).json({ success: true, data: newContact });
