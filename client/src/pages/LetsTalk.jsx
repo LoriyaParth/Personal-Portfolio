@@ -39,7 +39,7 @@ const LetsTalk = () => {
       await submitContact(formData);
 
       // Also send email notification directly from frontend to bypass Render's server block & Cloudflare protection
-      const web3FormsKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY || '8f1e35c2-4af9-4205-953c-147dcc5b3a8b';
+      const web3FormsKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY || '8f1e35c2-4fa9-4205-953c-147dcc5b3a8b';
       await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
         headers: {
