@@ -26,7 +26,7 @@ const About = ({ setActiveTab }) => {
       </div>
 
       {/* Marquee Banner */}
-      <div className="w-[100vw] relative left-1/2 -translate-x-1/2 bg-emerald-400 text-darkbg py-3 overflow-hidden select-none mb-20 font-bold uppercase tracking-wider text-sm whitespace-nowrap">
+      <div className="w-[calc(100%+3rem)] -mx-6 bg-emerald-400 text-darkbg py-3 overflow-hidden select-none mb-20 font-bold uppercase tracking-wider text-sm whitespace-nowrap">
         <div className="flex w-[200%] animate-marquee whitespace-nowrap">
           {Array(4).fill([
             "EMPATHY •", "USER FRIENDLY •", "ACCESSIBILITY •", "DESIGN THINKING •", "MERN STACK •", "3D INTERACTIVES •"
